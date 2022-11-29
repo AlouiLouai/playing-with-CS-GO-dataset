@@ -9,7 +9,6 @@ function App() {
   useEffect(() => {
     getAverageRoundLength()
       .then(x => {
-        console.log(x)
         setScore(x);
       });
   }, [score])
