@@ -14,7 +14,8 @@ module.exports = {
             let child = helper('./python_scripts/killPerPlayer.py')
             // collect data from script
             child.stdout.on('data', async function (data) {
-                dataToSend = await data.toString();
+                dataLength = data.toString().length
+                dataToSend = await data.toString().slice(1,dataLength-3);
             });
             // throw errors
             child.stderr.on("data", (data) => {
@@ -40,7 +41,8 @@ module.exports = {
             let child = helper('./python_scripts/scoreboard.py')
             // collect data from script
             child.stdout.on('data', async function (data) {
-                dataToSend = await data.toString();
+                dataLength = data.toString().length
+                dataToSend = await data.toString().slice(1,dataLength-3);
             });
             // throw errors
             child.stderr.on("data", (data) => {
@@ -66,7 +68,7 @@ module.exports = {
             let child = helper('./python_scripts/averageRoundLength.py')
             // collect data from script
             child.stdout.on('data', async function (data) {
-                dataToSend = await data.toString();
+                dataToSend = data.toString()
             });
             // throw errors
             child.stderr.on("data", (data) => {
