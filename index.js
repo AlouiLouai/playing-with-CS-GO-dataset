@@ -1,9 +1,10 @@
 const express = require('express')
 const body_parser = require('body-parser')
 const cors = require('cors')
-const { helper } = require('./helper/helperToCallPython')
-
+require('dotenv').config
 const app = express()
+
+
 
 var corsOptions = {
     origin: 'http://localhost:3000',
@@ -15,68 +16,11 @@ app.use(cors(corsOptions));
 app.use(body_parser.urlencoded({ extended: true }))
 app.use(body_parser.json())
 
-const port = 2000
+const port = process.env.PORT ? process.env.PORT : "2000";
 
-// kills per player
-app.get('/playerKills', (req, res) => {
-    // spawn new child process to call the python script
-    let dataToSend
-    let child = helper('./python_scripts/killPerPlayer.py')
-    // collect data from script
-    child.stdout.on('data', async function (data) {
-        dataToSend = await data.toString();
-    });
-    // throw errors
-    child.stderr.on("data", (data) => {
-        console.error(`stderr: ${data}`);
-    });
-    // in close event we are sure that stream from child process is closed
-    child.on('close', (code) => {
-        console.log(`child process close all stdio with code ${code}`);
-        // send data to browser
-        res.send(dataToSend)
-    })
-})
+// our routers here
+app.use(require('./routes/stats.routes'))
 
-// score board over match
-app.get('/scoreboard', (req, res) => {
-    let dataToSend
-    let child = helper('./python_scripts/scoreboard.py')
-    // collect data from script
-    child.stdout.on('data', async function (data) {
-        dataToSend = await data.toString();
-    });
-    // throw errors
-    child.stderr.on("data", (data) => {
-        console.error(`stderr: ${data}`);
-    });
-    // in close event we are sure that stream from child process is closed
-    child.on('close', (code) => {
-        console.log(`child process close all stdio with code ${code}`);
-        // send data to browser
-        res.send(dataToSend)
-    })
-})
-
-// average round length
-app.get('/averageRoundLength', (req, res) => {
-    let dataToSend
-    let child = helper('./python_scripts/averageRoundLength.py')
-    // collect data from script
-    child.stdout.on('data', async function (data) {
-        dataToSend = await data.toString();
-    });
-    // throw errors
-    child.stderr.on("data", (data) => {
-        console.error(`stderr: ${data}`);
-    });
-    // in close event we are sure that stream from child process is closed
-    child.on('close', (code) => {
-        console.log(`child process close all stdio with code ${code}`);
-        // send data to browser
-        res.send(dataToSend)
-    })
-})
 
 app.listen(port, () => console.log(`CS:GO app listening on port 
 ${port}!`))
