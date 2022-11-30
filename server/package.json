@@ -6,7 +6,7 @@
   "scripts": {
     "test": "mocha tests/*.js",
     "start": "node index.js",
-    "nodemon": "nodemon index.js"
+    "nodemon": "nodemon ./server/index.js"
   },
   "author": "Aloui Louai",
   "license": "ISC",
