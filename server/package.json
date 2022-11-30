@@ -2,7 +2,7 @@
   "name": "server",
   "version": "1.0.0",
   "description": "developer challenge",
-  "main": "index.js",
+  "main": "server/index.js",
   "scripts": {
     "test": "mocha tests/*.js",
     "start": "node index.js",
