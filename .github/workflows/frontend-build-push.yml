@@ -20,10 +20,11 @@ jobs:
           node-version: "16.x"
       - name: Install package dependencies
         run: npm install
-
+        working-directory: ./client
       - name: Check linting and formatting
         # Custom script for checking the linting and formatting being in place
         run: npm run lint
-
+        working-directory: ./client
       - name: Create test build
         run: npm run build
+        working-directory: ./client
