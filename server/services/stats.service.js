@@ -20,6 +20,7 @@ module.exports = {
             // throw errors
             child.stderr.on("data", (data) => {
                 console.error(`stderr: ${data}`);
+                console.log('test the build')
             });
             // in close event we are sure that stream from child process is closed
             child.on('close', (code) => {
