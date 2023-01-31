@@ -17,12 +17,6 @@ I am using the native library because I don't need a default rounting (3 compone
 - npm install 
 - npm start for running the react app 
 
-### Finally : final words always have their charm
-
-I am sorry for delivring a poor designed product . I am unlucky because I am preparing for my graduation presentation that will be this wednesday !! 
-I got a lot of time seaking for the riddle response , and really I have to push the work today (21/11/2022) to get time tomorrow completing graduation stuffs .
-
-
 #### Coming from boredom of workless having fixs & features added 
 
 - dockerfiles for server & client + docker-compose for both combined .
